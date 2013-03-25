@@ -8,7 +8,7 @@ If you have the following in `test.rb`:
 
 ```ruby
 def foo
-  return = 'test'
+  return = "test"
   puts "bam"
   return
 end
@@ -20,8 +20,8 @@ Then `ruby-return-variable test.rb` will run code equivalent to:
 
 ```ruby
 def foo
-  tmp = 'test'
-  puts '"bam"
+  tmp = "test"
+  puts "bam"
   return tmp
 end
 ```
