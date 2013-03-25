@@ -1,3 +1,5 @@
+#!ruby-return-variable
+
 def foo
   return = 'test'
   puts "bam"
