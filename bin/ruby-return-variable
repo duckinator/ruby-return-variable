@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+$DONTMODIFY = true
+%w[return_variable return_variable/version].each do |x|
+  require File.join(File.dirname(__FILE__), '..', 'lib', "#{x}.rb")
+end
+
+if ARGV.length > 0
+  ReturnVariable.new(ARGV[0])
+else
+  puts "Usage: #$0 file.rb"
+end
+
