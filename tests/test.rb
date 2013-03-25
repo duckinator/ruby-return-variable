@@ -1,4 +1,4 @@
-#!ruby-return-variable
+#!/usr/bin/env ruby-return-variable
 
 def foo
   return = 'test'
