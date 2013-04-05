@@ -2,13 +2,28 @@
 
 This is a quick experiment with altering ruby's syntax.
 
-Allow `return = ...` to specify the return value for a later `return`.
+Allow `$return = ...` to specify the return value for a later return (either explicit or implicit).
 
-If you have the following in `test.rb`:
+This:
 
 ```ruby
+require 'return_variable'
+
 def foo
-  return = "test"
+  $return = "test"
+  puts "bam"
+end
+
+puts foo
+```
+
+Is equivalent to:
+
+```ruby
+require 'return_variable'
+
+def foo
+  $return = "test"
   puts "bam"
   return
 end
@@ -16,14 +31,18 @@ end
 puts foo
 ```
 
-Then `ruby-return-variable test.rb` will run code equivalent to:
+Is equivalent to:
 
 ```ruby
+require 'return_variable'
+
 def foo
   tmp = "test"
   puts "bam"
-  return tmp
+  return (tmp ||= nil)
 end
+
+puts foo
 ```
 
 ## Installation
