@@ -18,11 +18,11 @@ class ReturnVariable
 
   def get_sexp
     sexp = RubyParser.new.parse @code
-    __modify_sexp(sexp)
+    sexp = __modify_sexp(sexp)
   end
 
   def __modify_sexp(sexp)
-    sexp.map! do |x|
+    ret = sexp.map do |x|
       if x.is_a?(Array)
         if x[0] == :gasgn && x[1] == :$return
           [:lasgn, :__return, *__modify_sexp(x[2..-1])]
@@ -40,10 +40,10 @@ class ReturnVariable
             default]]
 
         elsif x[0] == :defn
-          x[-1][-1] +=  [[:return,
-                          [:op_asgn_or,
-                            [:lvar, :__return],
-                            [:lasgn, :__return, [:nil]]]]]
+          x +=  [[:return,
+                  [:op_asgn_or,
+                    [:lvar, :__return],
+                    [:lasgn, :__return, [:nil]]]]]
 
           __modify_sexp(x)
         else
@@ -53,6 +53,8 @@ class ReturnVariable
         x
       end
     end
+
+    Sexp.from_array(ret)
   end
 
   def run_modified
