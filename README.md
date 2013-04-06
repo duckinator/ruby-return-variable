@@ -34,8 +34,6 @@ puts foo
 Is equivalent to:
 
 ```ruby
-require 'return_variable'
-
 def foo
   tmp = "test"
   puts "bam"
